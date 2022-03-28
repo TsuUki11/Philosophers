@@ -62,7 +62,6 @@ int	norm(t_simulation *philos, t_betw bet, int number)
 	if (!c_s(philos->philo_state, philos->info.philo_number)
 		|| eat == philos->info.must_eat)
 	{
-		philos->philo_state[number] = 0;
 		pthread_mutex_unlock(&philos->mutex);
 		return (1);
 	}
