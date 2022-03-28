@@ -19,7 +19,7 @@ OBJ = ./mandatory/obj
 
 FILE =  ./mandatory/philo.c ./mandatory/philo_utils_1.c ./mandatory/philo_utils_2.c ./mandatory/philo_utils_3.c ./mandatory/philo_utils_4.c \
 
-FILE_BONUS =  ./bonus/philo_bonus.c ./bonus/philo_bonus_utils_1.c \
+FILE_BONUS =  ./bonus/philo_bonus.c ./bonus/philo_bonus_utils_1.c ./bonus/philo_bonus_utils_2.c \
 
 FILE1 = $(FILE:.c=.o)
 

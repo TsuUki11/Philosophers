@@ -54,6 +54,8 @@ void	*philo_1(t_simulation *philos, t_betw bet, int number)
 	while (bet.before == -1)
 	{
 		pthread_mutex_lock(&philos->mutex);
+		if (!c_s(philos->philo_state, philos->info.philo_number))
+			break ;
 		if (conditions(number, philos, bet, 4)
 			&& c_s(philos->philo_state, philos->info.philo_number))
 		{
@@ -63,14 +65,8 @@ void	*philo_1(t_simulation *philos, t_betw bet, int number)
 			print(4, time, number, philos);
 		}
 		pthread_mutex_unlock(&philos->mutex);
-		pthread_mutex_lock(&philos->mutex);
-		if (!c_s(philos->philo_state, philos->info.philo_number))
-		{
-			pthread_mutex_unlock(&philos->mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&philos->mutex);
 	}
+	pthread_mutex_unlock(&philos->mutex);
 	return (0);
 }
 
