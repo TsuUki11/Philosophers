@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus_utils_2.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitoual <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/29 08:51:11 by aaitoual          #+#    #+#             */
+/*   Updated: 2022/03/29 08:51:16 by aaitoual         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers_bonus_lib.h"
 
 void	print(int i, long long time, int number)
@@ -5,11 +17,11 @@ void	print(int i, long long time, int number)
 	if (i == 1)
 		printf ("%lld %d has taken a fork\n", time, number + 1);
 	if (i == 0)
-    {
+	{
 		printf ("%lld %d has taken a fork\n", time, number + 1);
 		printf ("%lld %d is eating\n", time, number + 1);
-    }
-    if (i == 2)
+	}
+	if (i == 2)
 		printf ("%lld %d is sleeping\n", time, number + 1);
 	if (i == 3)
 		printf ("%lld %d is thiking\n", time, number + 1);

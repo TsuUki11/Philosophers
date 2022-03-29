@@ -49,18 +49,15 @@ typedef struct bet_s
 }	t_betw;
 
 void	ft_return(int i);
-void	creat_threads(t_philo_info info, t_simulation *philos);
 void	creat_philo_state(t_simulation *philos, t_philo_info info);
 void	*philo(void *p);
-int		check_states(t_simulation *p, int i);
-int		call_checker(t_simulation *philos);
+void	check_states(t_simulation *p, int i);
 void	print(int i, long long time, int number);
 void	ft_get_info(int ac, char **av, t_philo_info *info);
 int		ft_atoi(const char *str);
 int		arg_checker(t_philo_info info, int ac);
-int		check_prio(t_simulation *philos, int num);
 int		conditions(t_simulation *philos, int con);
-int		c_s(int *state, int number);
 int		check_time(t_simulation *philos, int t);
+void	simulation(t_simulation *philos);
 
 #endif
