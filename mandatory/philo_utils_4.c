@@ -47,21 +47,20 @@ int	get_usleep(t_philo_info info)
 	return (info.time_to_sleep - 20);
 }
 
-int	norm(t_simulation *philos, t_betw bet, int number)
+int	norm(t_simulation *philos, t_betw bet, int number, t_lanes *t)
 {
-	static long long		time;
-	static int				eat;
-
 	call_checker(philos, bet, number);
 	pthread_mutex_lock(&philos->mutex);
-	if (time != philos->prio[number])
+	if (t->time != philos->prio[number])
 	{
-		time = philos->prio[number];
-		eat++;
+		t->time = philos->prio[number];
+		t->eat += 1;
 	}
 	if (!c_s(philos->philo_state, philos->info.philo_number)
-		|| eat == philos->info.must_eat)
+		|| (philos->info.must_eat != -1 && t->eat >= philos->info.must_eat))
 	{
+		if (philos->info.must_eat != -1)
+			philos->philo_state[number] = 0;
 		pthread_mutex_unlock(&philos->mutex);
 		return (1);
 	}

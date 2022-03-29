@@ -28,6 +28,12 @@ typedef struct philo_info_s
 	int	must_eat;
 }	t_philo_info;
 
+typedef struct lanes
+{
+	long long	time;
+	int			eat;
+}	t_lanes;
+
 typedef struct simulation_s
 {
 	int				*philo_state;
@@ -58,6 +64,6 @@ int		check_prio(t_simulation *philos, int num);
 int		conditions(int number, t_simulation *philos, t_betw bet, int con);
 int		c_s(int *state, int number);
 int		check_time(t_simulation *philos, int number, int t);
-int		norm(t_simulation *philos, t_betw bet, int number);
+int		norm(t_simulation *philos, t_betw bet, int number, t_lanes *t);
 
 #endif

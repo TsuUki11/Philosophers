@@ -43,6 +43,17 @@ void	check_states_2(t_simulation *philos, t_betw bet, int number, int i)
 			print(3, i, number, philos);
 		}
 	}
+	if (i == 4)
+	{
+		if (conditions(number, philos, bet, 4)
+			&& c_s(philos->philo_state, philos->info.philo_number))
+		{
+			gettimeofday(&cur, NULL);
+			i = cur.tv_sec * 1000 + (cur.tv_usec / 1000) - philos->curr;
+			philos->philo_state[number] = 4;
+			print(4, i, number, philos);
+		}
+	}
 }
 
 void	check_states(t_simulation *p, t_betw bet, int number, int i)
@@ -76,9 +87,18 @@ void	check_states(t_simulation *p, t_betw bet, int number, int i)
 
 void	call_checker(t_simulation *philos, t_betw bet, int number)
 {
+	pthread_mutex_lock(&philos->mutex);
 	check_states(philos, bet, number, 1);
+	pthread_mutex_unlock(&philos->mutex);
+	pthread_mutex_lock(&philos->mutex);
 	check_states(philos, bet, number, 2);
+	pthread_mutex_unlock(&philos->mutex);
+	pthread_mutex_lock(&philos->mutex);
 	check_states(philos, bet, number, 3);
+	pthread_mutex_unlock(&philos->mutex);
+	pthread_mutex_lock(&philos->mutex);
+	check_states(philos, bet, number, 4);
+	pthread_mutex_unlock(&philos->mutex);
 }
 
 int	conditions(int number, t_simulation *philos, t_betw bet, int con)

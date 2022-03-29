@@ -52,7 +52,10 @@ int	check_deads(t_simulation *philos)
 
 	gettimeofday(&c, NULL);
 	time = c.tv_sec * 1000 + (c.tv_usec / 1000);
-	if (philos->info.time_to_die <= time - philos->curr - philos->last_time)
+	if (philos->must >= philos->info.must_eat + 1 && philos->info.must_eat >= 0)
+		return (1);
+	if (philos->info.time_to_die <= time - philos->curr - philos->last_time
+		&& philos->philo_state != 1)
 	{
 		printf ("%lld %d is dead\n", time - philos->curr, philos->num + 1);
 		return (1);

@@ -24,6 +24,22 @@ void	kill_childrennnnnnnnn(int *id, t_simulation *philos)
 	}
 }
 
+void	lanes(int f, t_simulation *philos, int i, int *id)
+{
+	if (f == 0)
+	{
+		philos->num = i - 1;
+		simulation(philos);
+	}
+	if (f != 0)
+	{
+		waitpid(-1, NULL, 0);
+		kill_childrennnnnnnnn(id, philos);
+		sem_close(philos->sem);
+		sem_close(philos->chk);
+	}
+}
+
 int	creat_childs(t_simulation *philos)
 {
 	int		f;
@@ -32,6 +48,8 @@ int	creat_childs(t_simulation *philos)
 
 	i = 0;
 	f = 1;
+	philos->chk = sem_open("chk", O_CREAT, 0660, 1);
+	philos->sem = sem_open("sem", O_CREAT, 0660, philos->info.philo_number / 2);
 	id = malloc (sizeof(int) * philos->info.philo_number);
 	while (i < philos->info.philo_number)
 	{
@@ -44,18 +62,8 @@ int	creat_childs(t_simulation *philos)
 		else
 			break ;
 	}
-	if (f == 0)
-	{
-		philos->num = i;
-		free(id);
-		simulation(philos);
-	}
-	if (f != 0)
-	{
-		waitpid(-1, NULL, 0);
-		kill_childrennnnnnnnn(id, philos);
-		free(id);
-	}
+	lanes(f, philos, i, id);
+	free(id);
 	return (0);
 }
 
@@ -74,14 +82,10 @@ int	main(int ac, char **av)
 	}
 	sem_unlink("sem");
 	sem_unlink("chk");
-	philos.chk = sem_open("chk", O_CREAT, 0660, 1);
-	philos.sem = sem_open("sem", O_CREAT, 0660, philos.info.philo_number / 2);
 	ft_get_info(ac, av, &info);
 	if (arg_checker(info, ac))
 		return (1);
 	creat_philo_state(&philos, info);
 	creat_childs(&philos);
-	sem_close(philos.sem);
-	sem_close(philos.chk);
 	return (0);
 }

@@ -38,8 +38,9 @@ typedef struct simulation_s
 	sem_t			*chk;
 	t_philo_info	info;
 	int				num;
-	long 	long	curr;
-	long	long	last_time;
+	int				must;
+	long long		curr;
+	long long		last_time;
 }	t_simulation;
 
 typedef struct bet_s

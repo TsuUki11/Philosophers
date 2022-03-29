@@ -46,5 +46,5 @@ clean:
 	@rm -f $(FILE1) $(FILE1_BONUS)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(NAME_BONUS)
 re: fclean all

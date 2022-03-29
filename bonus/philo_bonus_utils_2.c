@@ -15,9 +15,8 @@
 void	print(int i, long long time, int number)
 {
 	if (i == 1)
-		printf ("%lld %d has taken a fork\n", time, number + 1);
-	if (i == 0)
 	{
+		printf ("%lld %d has taken a fork\n", time, number + 1);
 		printf ("%lld %d has taken a fork\n", time, number + 1);
 		printf ("%lld %d is eating\n", time, number + 1);
 	}
